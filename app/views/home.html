@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row row-content">
+    <div class="col-xs-12">
+      <uib-alert ng-if="(hasError || success) && alert !== null" type="{{alert.type}}" close="closeAlert($index)">{{alert.message}}</uib-alert>
+    </div>
+    <div class="col-xs-12">
+      <uib-accordion close-others="true">
+        <uib-accordion-group ng-repeat="contact in contacts" is-open="contact.open">
+          <uib-accordion-heading>
+            <div class="media-body">
+              <h2 class="media-heading">{{titleContact(contact)}}</h2>
+            </div>
+          </uib-accordion-heading>
+          <form novalidate class="simple-form">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" ng-model="contact.name" />
+            </div>
+            
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" ng-model="contact.email" />
+            </div>
+            
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="text" ng-model="contact.phone"/>
+            </div>
+            
+            <input type="button" class="btn btn-danger" ng-click="deleteContact(contact)" value="Delete" />
+            <input type="submit" class="btn btn-success" ng-click="saveContact(contact)" value="Save" />
+          </form>
+        </uib-accordion-group>
+      </uib-accordion>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <button class="btn btn-success" ng-click="addContact()">Add new</button>
+        <button class="btn btn-info" ng-click="exportContacts()">Export</button>
+        <!-- <button class="btn btn-default" ng-click="importContacts()">Import</button> -->
+        <!-- <input type="file" class="" ng-model="importFile"> -->
+        <div class="btn btn-default" ngf-select="importContacts($file)">Import Contacts from file</div>
+    </div>
+  </div>
+</div>
